@@ -4,7 +4,7 @@ while True:
             number_2 = int(input("Enter a number 2:"))
         except ValueError:
             print("Invalid literal sign")
-            exit()
+
 
         operators = input("Enter a operators: ")
 
@@ -20,6 +20,7 @@ while True:
             print(f' Result: {number_1 / number_2}')
         else:
             print("Bad operator")
+exit()
 
 
 
