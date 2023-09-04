@@ -4,26 +4,26 @@ while True:
     user_str = user_str.split()
     for operator in user_str:
         if operator == '+':
-            x = stack.pop()
-            y = stack.pop()
+            x = stack.pop(0)
+            y = stack.pop(0)
             stack.append(x + y)
         elif operator == '-':
-            x = stack.pop()
-            y = stack.pop()
+            x = stack.pop(0)
+            y = stack.pop(0)
             stack.append(x - y)
         elif operator == '*':
-            x = stack.pop()
-            y = stack.pop()
+            x = stack.pop(0)
+            y = stack.pop(0)
             stack.append(x * y)
         elif operator == '/':
-            x = stack.pop()
-            y = stack.pop()
-            try:
-                y == 0
-            except ValueError:
-                print('Is not divided into zero')
-                print(f'The last of result {x}')
-                stack.append(x / y)
+            x = stack.pop(0)
+            y = stack.pop(0)
+            if y == 0:
+                print('Division by zero is not allowed')
+                print(f'The last result: {x}')
+                break
+            stack.append(x / y)
+
         else:
             try:
                 stack.append(int(operator))
@@ -33,6 +33,6 @@ while True:
         print(stack[0])
     except IndexError:
         print('Invalid literal sign in list index')
-    user_input = input('Do you want to exit the program? (Yes or not): ')
+    user_input = input('Do you want to exit the program? (Yes or no): ')
     if user_input.lower() == 'yes':
         exit()
