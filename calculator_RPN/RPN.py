@@ -17,7 +17,7 @@ def calculate(x, y, operator):
         case '*':
             return y * x
         case '/':
-            if y == 0:
+            if x == 0:
                 print('Division by zero is not allowed')
                 print(f'The first operand: {y}')
                 return y
