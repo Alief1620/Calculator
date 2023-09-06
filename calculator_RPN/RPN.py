@@ -1,44 +1,65 @@
 stack = []
-while True:
-        user_str = input('Enter a numbers and operators separated by spaces: ')
-        user_str = user_str.split()
-        for token in user_str:
-            if token.isdigit():
-                stack.append(int(token))
-            elif token in " '+', '-', '*', '/'":
-                if len(stack) < 2:
-                    print('Not enough operands for')
-                    break
-                x = stack.pop(0)
-                y = stack.pop(0)
-                match token:
-                    case '+':
-                        stack.append(x + y)
-                    case '-':
-                        stack.append(x - y)
-                    case '*':
-                        stack.append(x * y)
-                    case '/':
-                        if y == 0:
-                            print('Division by zero is not allowed')
-                            print(f'The last result: {x}')
-                            stack.append(x)
-                            exit()
-                        stack.append(x / y)
-            else:
-                print('Invalid input:', token)
+OPERATORS = ['+', '-', '*', '/']
+YES = 'yes'
+
+
+def get_user_input():
+    user_str = input('Enter a numbers and operators separated by spaces: ')
+    return user_str.split()
+
+
+def calculate(x, y, operator):
+    match operator:
+        case '+':
+            return x + y
+        case '-':
+            return x - y
+        case '*':
+            return x * y
+        case '/':
+            if y == 0:
+                print('Division by zero is not allowed')
+                print(f'The first operand: {x}')
+                return x
+            return x / y
+
+
+def user_string_calculator_formatter(user_str):
+    for element in user_str:
+        if element.isdigit():
+            stack.append(int(element))
+        elif element in OPERATORS:
+            if len(stack) < 2:
+                print('Not enough operands for')
                 break
+            stack.append(calculate(stack.pop(0), stack.pop(0), element))
+        else:
+            print('Invalid input:', element)
+            break
+    try:
+        print(stack[0])
+    except IndexError:
+        print('Invalid literal sign in list index')
 
-        try:
-            print(stack[0])
-        except IndexError:
-            print('Invalid literal sign in list index')
 
-        ask_user_update_the_program = input('Do you want to make a calculation with the previous result? (Yes or No): ')
-        if ask_user_update_the_program != 'yes':
+def has_to_clear_user_stack():
+    user_response = input('Do you want to make a calculation with the previous result? (Yes or No): ')
+    return user_response != YES
+
+
+def has_to_continue():
+    user_response = input('Do you want to continue? (Yes or No): ')
+    return user_response != YES
+
+
+def run():
+    while True:
+        user_string_calculator_formatter(get_user_input())
+        if has_to_clear_user_stack():
             stack.clear()
+            if has_to_continue():
+                exit()
 
-        ask_user_to_continue = input('Do you want to continue? (Yes or No): ')
-        if ask_user_to_continue != 'yes':
-            exit()
+
+run()
 
