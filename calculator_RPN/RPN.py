@@ -11,17 +11,17 @@ def get_user_input():
 def calculate(x, y, operator):
     match operator:
         case '+':
-            return x + y
+            return y + x
         case '-':
-            return x - y
+            return y - x
         case '*':
-            return x * y
+            return y * x
         case '/':
             if y == 0:
                 print('Division by zero is not allowed')
-                print(f'The first operand: {x}')
-                return x
-            return x / y
+                print(f'The first operand: {y}')
+                return y
+            return y / x
 
 
 def user_string_calculator_formatter(user_str):
@@ -32,7 +32,7 @@ def user_string_calculator_formatter(user_str):
             if len(stack) < 2:
                 print('Not enough operands for')
                 break
-            stack.append(calculate(stack.pop(0), stack.pop(0), element))
+            stack.append(calculate(stack.pop(), stack.pop(), element))
         else:
             print('Invalid input:', element)
             break
