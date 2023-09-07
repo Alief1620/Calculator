@@ -10,20 +10,21 @@ def get_user_input():
     return user_str.split()
 
 
-def calculate(operand_1, operand_2, operator):
+def calculate(argument_1, argument_2, operator):
     match operator:
         case '+':
-            return operand_2 + operand_1
+            return argument_2 + argument_1
         case '-':
-            return operand_2 - operand_1
+            return argument_2 - argument_1
         case '*':
-            return operand_2 * operand_1
+            return argument_2 * argument_1
         case '/':
-            if operand_1 == 0:
+            try:
+                return argument_2 / argument_1
+            except ZeroDivisionError:
                 print('Division by zero is not allowed')
-                print(f'The first operand: {operand_2}')
-                return operand_2
-            return operand_2 / operand_1
+                print(f'The last result: {argument_2}')
+            return argument_2
 
 
 def user_string_calculator_formatter(user_str):
@@ -31,9 +32,10 @@ def user_string_calculator_formatter(user_str):
         if element.isdigit():
             stack.append(int(element))
         elif element in OPERATORS:
-            if len(stack) < 2:
+            try:
+                len(stack) < 2
+            except ValueError:
                 print('Not enough operands for')
-                break
             stack.append(calculate(stack.pop(), stack.pop(), element))
         else:
             print('Invalid input:', element)
@@ -43,24 +45,18 @@ def user_string_calculator_formatter(user_str):
     except IndexError:
         print('Invalid literal sign in list index')
 
+    user_response = input('Do a calculation with the past result? (Yes or No): ')
+    if user_response != YES:
+        stack.clear()
 
-def has_to_clear_user_stack():
-    user_response = input('Perform calculation with the previous result? (Yes or No): ')
-    return user_response != YES
-
-
-def has_to_continue():
     user_response = input('Do you want to continue? (Yes or No): ')
-    return user_response != YES
+    if user_response != YES:
+        sys.exit()
 
 
 def run():
     while True:
         user_string_calculator_formatter(get_user_input())
-        if has_to_clear_user_stack():
-            stack.clear()
-            if has_to_continue():
-                sys.exit()
 
 
 run()
