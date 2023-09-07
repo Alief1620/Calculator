@@ -32,10 +32,9 @@ def user_string_calculator_formatter(user_str):
         if element.isdigit():
             stack.append(int(element))
         elif element in OPERATORS:
-            try:
-                len(stack) < 2
-            except ValueError:
+            if len(stack) < 2:
                 print('Not enough operands for')
+                break
             stack.append(calculate(stack.pop(), stack.pop(), element))
         else:
             print('Invalid input:', element)
