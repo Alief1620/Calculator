@@ -1,3 +1,5 @@
+import sys
+
 stack = []
 OPERATORS = ['+', '-', '*', '/']
 YES = 'yes'
@@ -8,20 +10,20 @@ def get_user_input():
     return user_str.split()
 
 
-def calculate(x, y, operator):
+def calculate(operand_1, operand_2, operator):
     match operator:
         case '+':
-            return y + x
+            return operand_2 + operand_1
         case '-':
-            return y - x
+            return operand_2 - operand_1
         case '*':
-            return y * x
+            return operand_2 * operand_1
         case '/':
-            if x == 0:
+            if operand_1 == 0:
                 print('Division by zero is not allowed')
-                print(f'The first operand: {y}')
-                return y
-            return y / x
+                print(f'The first operand: {operand_2}')
+                return operand_2
+            return operand_2 / operand_1
 
 
 def user_string_calculator_formatter(user_str):
@@ -43,7 +45,7 @@ def user_string_calculator_formatter(user_str):
 
 
 def has_to_clear_user_stack():
-    user_response = input('Do you want to make a calculation with the previous result? (Yes or No): ')
+    user_response = input('Perform calculation with the previous result? (Yes or No): ')
     return user_response != YES
 
 
@@ -58,8 +60,7 @@ def run():
         if has_to_clear_user_stack():
             stack.clear()
             if has_to_continue():
-                exit()
+                sys.exit()
 
 
 run()
-
