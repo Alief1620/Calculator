@@ -22,7 +22,7 @@ def calculate(argument_1, argument_2, operator):
             return argument_2
 
 
-def has_more_than_two_elements(stack):
+def number_of_elements(stack):
     return len(stack) < 2
 
 
@@ -31,7 +31,7 @@ def user_string_calculator_formatter(user_str):
         if element.isdigit():
             stack.append(int(element))
         elif element in OPERATORS:
-            if has_more_than_two_elements(stack):
+            if number_of_elements(stack):
                 print('Not enough operands for')
                 break
             stack.append(calculate(stack.pop(0), stack.pop(0), element))
