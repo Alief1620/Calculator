@@ -44,17 +44,17 @@ def user_string_calculator_formatter(user_str: str) -> int:
         print('Invalid literal sign in list index')
 
 
-def clear_user_stack():
+def clear_user_stack() -> bool:
     user_response = input('Do a calculation with the past result? (Yes or No): ')
     return user_response != YES
 
 
-def want_to_continue():
+def want_to_continue() -> bool:
     user_response = input('Do you want continue? (Yes or No):')
     return user_response != YES
 
 
-def run():
+def run() -> None:
     while True:
         user_str = input('Enter a numbers and operators separated by spaces: ')
         user_str = user_str.split()
