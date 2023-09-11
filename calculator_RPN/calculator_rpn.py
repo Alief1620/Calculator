@@ -5,7 +5,7 @@ OPERATORS = ['+', '-', '*', '/']
 YES = 'yes'
 
 
-def calculate(argument_1, argument_2, operator):
+def calculate(argument_1: int, argument_2: int, operator: str) -> int:
     match operator:
         case '+':
             return argument_2 + argument_1
@@ -22,11 +22,11 @@ def calculate(argument_1, argument_2, operator):
             return argument_2
 
 
-def number_of_elements(stack):
+def number_of_elements(stack: int) -> int:
     return len(stack) < 2
 
 
-def user_string_calculator_formatter(user_str):
+def user_string_calculator_formatter(user_str: str) -> int:
     for element in user_str:
         if element.isdigit():
             stack.append(int(element))
@@ -44,12 +44,12 @@ def user_string_calculator_formatter(user_str):
         print('Invalid literal sign in list index')
 
 
-def has_to_clear_user_stack():
+def clear_user_stack():
     user_response = input('Do a calculation with the past result? (Yes or No): ')
     return user_response != YES
 
 
-def has_to_continue():
+def want_to_continue():
     user_response = input('Do you want continue? (Yes or No):')
     return user_response != YES
 
@@ -59,9 +59,9 @@ def run():
         user_str = input('Enter a numbers and operators separated by spaces: ')
         user_str = user_str.split()
         user_string_calculator_formatter(user_str)
-        if has_to_clear_user_stack():
+        if clear_user_stack():
             stack.clear()
-            if has_to_continue():
+            if want_to_continue():
                 sys.exit()
 
 
