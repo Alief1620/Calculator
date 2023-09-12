@@ -22,19 +22,26 @@ def calculate(argument_1: int, argument_2: int, operator: str) -> int:
             return argument_2
 
 
-def number_of_elements(stack: int) -> int:
-    return len(stack) < 2
+def process_operand(element: str, stack: int) -> int:
+    if element.isdigit():
+        stack.append(int(element))
+    else:
+        print('Invalid input:', element)
+
+
+def process_operator(element: str, stack: int) -> int:
+    if len(stack) < 2:
+        print('Not enough operands for', element)
+    else:
+        stack.append(calculate(stack.pop(0), stack.pop(0), element))
 
 
 def user_string_calculator_formatter(user_str: str) -> int:
     for element in user_str:
         if element.isdigit():
-            stack.append(int(element))
+            process_operand(element, stack)
         elif element in OPERATORS:
-            if number_of_elements(stack):
-                print('Not enough operands for')
-                break
-            stack.append(calculate(stack.pop(0), stack.pop(0), element))
+            process_operator(element, stack)
         else:
             print('Invalid input:', element)
             break
