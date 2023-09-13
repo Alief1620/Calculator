@@ -36,7 +36,7 @@ def process_operator(element: str, stack: int) -> int:
         stack.append(calculate(stack.pop(0), stack.pop(0), element))
 
 
-def user_string_calculator_formatter(user_str: str) -> int:
+def expression_check(user_str: str) -> int:
     for element in user_str:
         if element.isdigit():
             process_operand(element, stack)
@@ -65,7 +65,7 @@ def run() -> None:
     while True:
         user_str = input('Enter a numbers and operators separated by spaces: ')
         user_str = user_str.split()
-        user_string_calculator_formatter(user_str)
+        expression_check(user_str)
         if clear_user_stack():
             stack.clear()
             if want_to_continue():
